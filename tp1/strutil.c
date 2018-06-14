@@ -15,30 +15,38 @@ char* _split(const char* str,int inicio,size_t fin){
   return vector_slice;
 }
 
-char** split(const char* str,char sep){
-  if (!str || !sep) return NULL;
+// Pre: recibe un cadena str y un caracter sep y cuenta la cantidad de veces que
+// se repite el mismo.
+// Post: devuelve la cantidad de apariciones de sep en str.
+int obtener_apariciones(const char* str,char sep){
   int apariciones=0;
   for (int i=0; str[i]; i++){
     if (str[i]==sep) apariciones++;
   }
+  return apariciones;
+}
+
+char** split(const char* str,char sep){
+  if (!str || !sep) return NULL;
+  int apariciones=obtener_apariciones(str,sep);
   int longitud=apariciones+2;
   char** vector_split=malloc(sizeof(char*)*longitud);
   if (!vector_split) return NULL;
   vector_split[longitud-1]=NULL;
+  size_t longitud_str=strlen(str);
   if (!apariciones){
-    vector_split[0]=_split(str,0,strlen(str));
+    vector_split[0]=_split(str,0,longitud_str);
     return vector_split;
   }
   int inicio=0;
   int j=0;
-  for (int i=0; str[i]; i++){
-    if (str[i]==sep){
+  for (int i=0; i<longitud_str+1; i++){
+    if (str[i]==sep || !str[i]){
       vector_split[j]=_split(str,inicio,i);
       int nuevo_inicio=i+1;
       inicio=nuevo_inicio;
       j++;
     }
-    if (!str[i+1]) vector_split[j]=_split(str,inicio,i+1);
   }
   return vector_split;
 }
