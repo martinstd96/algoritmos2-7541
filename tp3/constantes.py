@@ -1,0 +1,10 @@
+IR = "ir"
+VIAJE = "viaje"
+ITINERARIO = "itinerario"
+OPTIMO = "optimo"
+APROXIMADO = "aproximado"
+VIAJE_OPTIMO = "viaje optimo"
+VIAJE_APROXIMADO = "viaje_aproximado"
+TUPLA_IR_VIAJE = ("ir", VIAJE)
+CIUDADES = "ciudades"
+INFINITO = 10000000
